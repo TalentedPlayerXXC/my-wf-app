@@ -1,6 +1,7 @@
 
 export type StateType = {
     theme: string;
+    platform: any
 }
 
 export type Actions = {

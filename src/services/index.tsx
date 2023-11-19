@@ -36,11 +36,17 @@ function Solaris(type = "robot") {
 function EntratiSyndicate(type = "robot") {
     return axios.get(`wf/${type}/Solaris`)
 }
-// 地球时间
-// earthCycle
-function earthCycle(type = "detail") {
-    return axios.get(`wf/${type}/earthCycle`)
+// 新闻
+// news
+function news(type = "detail") {
+    return axios.get(`wf/${type}/news`)
 }
+// 活动
+// events
+function events(type = "detail") {
+    return axios.get(`wf/${type}/events`)
+}
+
 
 export {
     arbitration,
@@ -49,5 +55,6 @@ export {
     Ostrons,
     Solaris,
     EntratiSyndicate,
-    earthCycle,
+    news,
+    events,
 }

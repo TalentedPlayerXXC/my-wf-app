@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer, useState, useEffect } from 'react';
+import React, { useReducer, Reducer, useState } from 'react';
 import { Menu, Switch } from 'antd'
 import type { MenuProps, MenuTheme } from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
@@ -6,12 +6,13 @@ import { useNavigate } from 'react-router-dom'
 import Router from './router';
 import ThemeContext from './store';
 import { StateType, Actions } from './types'
-import { RenderCycle } from './utils';
+// import { RenderCycle } from './utils';
+import RenderCycle from './component/RenderCycle';
 import logo from './logo.png'
 import styles from './App.module.css';
 type MenuItem = Required<MenuProps>['items'][number];
-// style={{ background: 'rgb(0, 21, 41)' }} 夜间配色方案
-// background: rgba(230, 218, 218, 0.1); 白天方案
+// rgb(0, 21, 41)' }} 夜间配色方案
+// rgba(230, 218, 218, 0.1); 白天方案
 function getItem(
   label: React.ReactNode,
   key?: React.Key | null,
@@ -28,13 +29,13 @@ function getItem(
   } as MenuItem;
 }
 const IconFont = createFromIconfontCN({
-  scriptUrl: '//at.alicdn.com/t/c/font_4331933_mpwceba06n.js',
+  scriptUrl: '//at.alicdn.com/t/c/font_4331933_1tn7queh4jkj.js',
 });
 const items: MenuItem[] = [
-  getItem('信息总览', 'home', <IconFont type="icon-shishixinxi" />),
-  getItem('突击', 'sortie'),
-  getItem('仲裁', 'arbitration'),
-  getItem('平原', 'sub4'),
+  getItem('信息总览', 'overview', <IconFont type="icon-shishixinxi" />),
+  getItem('warframeMarket', 'wm', <IconFont type="icon-shichang" />),
+  // getItem('仲裁', 'arbitration', <IconFont type="icon-shishixinxi" />),
+  // getItem('平原', 'sub4', <IconFont type="icon-shishixinxi" />),
 ];
 function App() {
   const navigate = useNavigate()
@@ -49,40 +50,25 @@ function App() {
         return state;
     }
   };
-  const [selectKey, setSelectKey] = useState('home')
-  const [states, dispatch] = useReducer(reducerAction, { theme: 'light' });
+  const [selectKey, setSelectKey] = useState('overview')
+  const [states, dispatch] = useReducer(reducerAction, { theme: 'light',platform: window.navigator?.userAgent.toLowerCase()?.includes('windows') });
   // 通过选择 菜单操作切换路由
   const changeSelectKey = (e: any) => {
     setSelectKey(e?.key)
     navigate(`/${e?.key}`, { replace: true })
 
   }
-  // useEffect(() => {
-  //   earthCycle()
-  //     .then((res: any) => console.log(res?.data?.timeLeft, 'shuju'))
-  //     .catch(err => console.error('似乎出现问题了？', err))
-  // }, [])
-  //   <span style={{ marginLeft: 10 }}>
-  //   地球(白昼)
-  //   <p>1:00:00</p>
-  // </span>
   return (
-    <ThemeContext.Provider value={{ theme: states?.theme, dispatch: dispatch }}>
-      <div className={styles.App}>
-
+    <ThemeContext.Provider value={{ theme: states?.theme, platform: states?.platform, dispatch: dispatch }}>
+      <div className={styles.App} style={{ background: states?.theme === 'light'? 'rgba(230, 218, 218, 0.1)': 'rgb(0, 21, 41)' }}>
         <header className={styles.header}>
           <img src={logo} style={{ height: 40, marginLeft: 10, verticalAlign: 'middle' }} alt="wf" />
           <div className={styles.cycleTime}>
-            {/*
-           earthCycle  地球时间
-           cetusCycle 地球平原时间
-           vallisCycle  金星平原时间
-           cambionCycle 火卫二平原时间
-          */}
             <RenderCycle cycle="earthCycle" />
             <RenderCycle cycle="cetusCycle" />
             <RenderCycle cycle="vallisCycle" />
             <RenderCycle cycle="cambionCycle" />
+            <RenderCycle cycle="zarimanCycle" />
           </div>
           <Switch
             style={{ marginRight: '50px' }}
