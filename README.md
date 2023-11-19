@@ -1,13 +1,9 @@
 ## warframe相关信息
-
-## Available Scripts
-
+安装依赖
+### `yarn` `pnpm` `npm i`
 In the project directory, you can run:
 
-### `yarn start`
+### `yarn start` `pnpm start` `npm run start`
 
-### `yarn eject`
-
-**Note: 此操作不可逆！**
 
 
