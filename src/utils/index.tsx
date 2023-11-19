@@ -45,64 +45,6 @@ const textFormat = (str: string) => {
         return str.replace(reg, '<br/>')
     }
 }
-// const RenderCycle = ({ cycle }: any) => {
-//     const [state, setState] = useState({
-//         status: '',
-//         time: '',
-//         isOld: false
-//     })
-//     useEffect(() => {
-//         axios.get(`wf/robot/${cycle}`)
-//             .then((res: any) => {
-//                 if (res && res?.data) {
-//                     let arr = res?.data.replace(/\n/g, ',').split(',')
-//                     setState({
-//                         status: arr[0]?.split('：')[1],
-//                         time: arr[1]?.split('：')[1]?.slice(3) || '',
-//                         isOld: arr[1]?.split('：')[1].includes('已过去')
-//                     })
-//                 }
-//             })
-//             .catch(err => {
-//                 console.error('似乎出现了一点问题', err);
-//                 // setState(')
-//             })
-//         let timer = setInterval(() => {
-//             axios.get(`wf/robot/${cycle}`)
-//                 .then((res: any) => {
-//                     if (res && res?.data) {
-//                         let arr = res?.data.replace(/\n/g, ',').split(',')
-//                         setState({
-//                             status: arr[0]?.split('：')[1],
-//                             time: arr[1]?.split('：')[1]?.slice(3) || '',
-//                             isOld: arr[1]?.split('：')[1].includes('已过去')
-//                         })
-//                     }
-//                 })
-//                 .catch(err => {
-//                     console.error('似乎出现了一点问题', err);
-//                     // setState(')
-//                 })
-//         }, 10000);
-//         return () => clearInterval(timer)
-//     }, [cycle])
-//     useEffect(() => {
-//         let time = setInterval(() => {
-//             setState((s: any) => ({
-//                 ...s,
-//                 time: timeFormat(s?.time, s?.isOld ? -1 : 1)
-//             }))
-//         }, 1000)
-//         // return () => clearInterval(time)
-//     }, [])
-//     return (
-//         <span style={{ marginLeft: 10, color: '#f0e6e6' }}>
-//             <>{cycleEnum[`${cycle}`]}</>
-//             ({state?.status})
-//             <p style={{ width: 160 }}>{state?.isOld ? `已过时${state?.time}` : state?.time}</p>
-//         </span>
-//     )
-// }
 
 const formattedDate = (date: any) => {
     const newDate = new Date(date)
@@ -112,10 +54,24 @@ const formattedDate = (date: any) => {
     return `${year}年${month}月${day}日`
 }
 
+const throttle = (fn: any, delay: number) => {
+    let timer: any = null;
+    let _this = this
+    return (...args: any) => {
+        if (!timer) {
+            timer = setTimeout(() => {
+                fn.apply(_this, args)
+                timer = null
+            }, delay)
+        }
+    }
+}
+
 export {
     timeFormat,
     //  RenderCycle, 
     formattedDate,
     cycleEnum,
-    textFormat
+    textFormat,
+    throttle
 }

@@ -11,13 +11,9 @@ function Overview() {
         // indexStyles['windows']
         // ${isWindows ? indexStyles['windows'] : ''}
         <div className={`${styles['context']}`}>
-            {/* <div style={{ display: 'flex' }}>
-            </div> */}
             <Sortie />
             <News />
             <Events />
-            {/* <div style={{ display: 'flex' }}>
-            </div> */}
             <Arbitration />
             <PlanetBounty type="Ostrons" />
             <PlanetBounty type="Solaris" />

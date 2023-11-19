@@ -16,7 +16,6 @@
 
 .cycleTime {
   flex: 1;
-  height: 100%;
   display: flex;
   justify-content: space-around;
   text-align: center;

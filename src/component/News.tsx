@@ -2,12 +2,20 @@ import { useContext, useEffect, useState } from 'react'
 import { news } from '../services'
 import styles from './index.module.less'
 import { formattedDate } from '../utils'
+import dictionary from '../Dict.json'
 import ThemeContext from '../store'
 function News() {
     const [newList, setNewList]: any = useState([])
     const theme: any = useContext(ThemeContext)
 
     useEffect(() => {
+        // let start = new Date().getTime()
+        // console.log('执行开始');
+        // let str = 'Garuda Systems Blueprint'
+        // const ar = dictionary.filter((item: any) => str.includes(item.en)
+        // )
+        // let end = new Date().getTime()
+        // console.log(end - start, str, '执行结束', ar);
         news()
             .then((res: any) => {
                 if (res && res?.data) {
@@ -24,7 +32,7 @@ function News() {
 
             </span>
             <ul>
-                {newList?.map((item: any) => (
+                {newList?.map((item: any, idx: number) => (
                     <li className={styles['card-item']} key={item?.id}>
                         <a
                             href={item?.link}
@@ -38,11 +46,12 @@ function News() {
                             rel="noreferrer"
                         >
                             <span>
-                                {item?.message}
+                                {idx + 1}.{item?.message}
+                                <span>
+                                    {item?.endDate ? `结束于${formattedDate(item?.endDate)}` : ''}
+                                </span>
                             </span>
-                            <span>
-                                {item?.endDate ? `结束于${formattedDate(item?.endDate)}` : ''}
-                            </span>
+
                         </a>
                     </li>
                 ))}

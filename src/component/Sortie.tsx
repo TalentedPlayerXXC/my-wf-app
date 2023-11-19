@@ -30,10 +30,10 @@ function Sortie() {
     }, [state])
 
     return (
-        <div className={styles.card} >
+        <div className={styles.card}>
             <span className={styles['card-head']}>
                 <span className={styles['card-title']}>突击</span>
-                <span style={{ width: 170 }}>
+                <span>
                     还剩余{timeFormat(state?.eta, 0)}
                 </span>
             </span>

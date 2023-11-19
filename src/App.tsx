@@ -1,4 +1,4 @@
-import React, { useReducer, Reducer, useState } from 'react';
+import React, { useReducer, Reducer, useState, useEffect } from 'react';
 import { Menu, Switch } from 'antd'
 import type { MenuProps, MenuTheme } from 'antd';
 import { createFromIconfontCN } from '@ant-design/icons';
@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 import Router from './router';
 import ThemeContext from './store';
 import { StateType, Actions } from './types'
-// import { RenderCycle } from './utils';
 import RenderCycle from './component/RenderCycle';
 import logo from './logo.png'
 import styles from './App.module.css';
@@ -51,25 +50,42 @@ function App() {
     }
   };
   const [selectKey, setSelectKey] = useState('overview')
-  const [states, dispatch] = useReducer(reducerAction, { theme: 'light',platform: window.navigator?.userAgent.toLowerCase()?.includes('windows') });
+  const [width, setWidth] = useState(0)
+  const [states, dispatch] = useReducer(reducerAction, { theme: 'light', platform: window.navigator?.userAgent.toLowerCase()?.includes('windows') || false });
   // 通过选择 菜单操作切换路由
   const changeSelectKey = (e: any) => {
     setSelectKey(e?.key)
     navigate(`/${e?.key}`, { replace: true })
 
   }
+  const resizeUpdate = (e: any) => {
+    // 通过事件对象获取浏览器窗口的高度
+    let h = e?.target?.innerWidth;
+    setWidth(h);
+  };
+
+  useEffect(() => {
+    // TODO:高度监控
+    let h = window.innerWidth;
+    setWidth(h)
+    window.addEventListener('resize', resizeUpdate)
+    return () => { window.removeEventListener('resize', resizeUpdate) }
+  }, [])
   return (
     <ThemeContext.Provider value={{ theme: states?.theme, platform: states?.platform, dispatch: dispatch }}>
-      <div className={styles.App} style={{ background: states?.theme === 'light'? 'rgba(230, 218, 218, 0.1)': 'rgb(0, 21, 41)' }}>
+      <div className={styles.App} style={{ background: states?.theme === 'light' ? 'rgba(230, 218, 218, 0.1)' : 'rgb(0, 21, 41)' }}>
         <header className={styles.header}>
-          <img src={logo} style={{ height: 40, marginLeft: 10, verticalAlign: 'middle' }} alt="wf" />
-          <div className={styles.cycleTime}>
-            <RenderCycle cycle="earthCycle" />
-            <RenderCycle cycle="cetusCycle" />
-            <RenderCycle cycle="vallisCycle" />
-            <RenderCycle cycle="cambionCycle" />
-            <RenderCycle cycle="zarimanCycle" />
-          </div>
+          <img src={logo} style={{ width: '20%', minWidth: 200, maxWidth: '300px', marginLeft: 10, verticalAlign: 'middle' }} alt="wf" />
+          {
+            width > 900 &&
+            <div className={styles.cycleTime}>
+              <RenderCycle cycle="earthCycle" />
+              <RenderCycle cycle="cetusCycle" />
+              <RenderCycle cycle="vallisCycle" />
+              <RenderCycle cycle="cambionCycle" />
+              <RenderCycle cycle="zarimanCycle" />
+            </div>
+          }
           <Switch
             style={{ marginRight: '50px' }}
             checked={states?.theme === 'dark'}

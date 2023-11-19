@@ -43,7 +43,7 @@ const RenderCycle = ({ cycle }: any) => {
         return () => clearInterval(timer)
     }, [cycle])
     useEffect(() => {
-        let time = setInterval(() => {
+      setInterval(() => {
             setState((s: any) => ({
                 ...s,
                 time: timeFormat(s?.time, s?.isOld ? -1 : 1)
@@ -55,7 +55,7 @@ const RenderCycle = ({ cycle }: any) => {
         <span style={{ marginLeft: 10, color: '#f0e6e6' }}>
             <>{cycleEnum[`${cycle}`]}</>
             ({state?.status})
-            <p style={{ width: 160 }}>{state?.isOld ? `已过时${state?.time}` : state?.time}</p>
+            <p style={{ minWidth: 110 }}>{state?.isOld ? `已过时${state?.time}` : state?.time}</p>
         </span>
     )
 }

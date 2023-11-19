@@ -3,7 +3,7 @@ import styles from './index.module.less'
 import { arbitration } from '../services'
 import ThemeContext from "../store";
 function Arbitration() {
-    const theme:any = useContext(ThemeContext)
+    const theme: any = useContext(ThemeContext)
     const [state, setState] = useState({
         enemy: '',
         id: '',
@@ -13,7 +13,7 @@ function Arbitration() {
         arbitration()
             .then(res => {
                 if (res && res?.data) {
-                    console.log(res); setState(res?.data)
+                    setState(res?.data)
                 }
             })
             .catch(err => { console.log('似乎出现了一点问题', err); })
