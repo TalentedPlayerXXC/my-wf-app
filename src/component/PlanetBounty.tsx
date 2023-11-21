@@ -21,7 +21,7 @@ function PlanetBounty({ type }: any) {
         plantTime: '',
     })
     useEffect(() => {
-        axios.get(`wf/robot/${type}`)
+        axios.get(`/api/wf/robot/${type}`)
             .then((res: any) => {
                 if (
                     res?.data?.split('时间：')[1].includes('还剩余') ||

@@ -8,7 +8,7 @@ const RenderCycle = ({ cycle }: any) => {
         isOld: false
     })
     useEffect(() => {
-        axios.get(`/wf/robot/${cycle}`)
+        axios.get(`/api/wf/robot/${cycle}`)
             .then((res: any) => {
                 if (res && res?.data) {
                     let arr = res?.data.replace(/\n/g, ',').split(',')
@@ -24,7 +24,7 @@ const RenderCycle = ({ cycle }: any) => {
                 // setState(')
             })
         let timer = setInterval(() => {
-            axios.get(`wf/robot/${cycle}`)
+            axios.get(`/api/wf/robot/${cycle}`)
                 .then((res: any) => {
                     if (res && res?.data) {
                         let arr = res?.data.replace(/\n/g, ',').split(',')
