@@ -38,7 +38,8 @@ function Events() {
                                         style={{
                                             color: theme?.theme === 'dark' ? 'rgb(185, 207, 207)' : '',
                                             display: 'flex',
-                                            justifyContent: 'space-between'
+                                            justifyContent: 'space-between',
+                                            // flexDirection: "row"
                                         }}
                                     >
                                         <span>

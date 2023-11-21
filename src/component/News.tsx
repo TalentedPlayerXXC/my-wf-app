@@ -2,20 +2,40 @@ import { useContext, useEffect, useState } from 'react'
 import { news } from '../services'
 import styles from './index.module.less'
 import { formattedDate } from '../utils'
-import dictionary from '../Dict.json'
 import ThemeContext from '../store'
 function News() {
     const [newList, setNewList]: any = useState([])
     const theme: any = useContext(ThemeContext)
 
     useEffect(() => {
-        // let start = new Date().getTime()
-        // console.log('执行开始');
-        // let str = 'Garuda Systems Blueprint'
+        // let str = '2X Breath Of The Eidolon'
+        // let str1 = str.replace(reg1, '')
+        // let str2 = str.replace(reg2, '')
         // const ar = dictionary.filter((item: any) => str.includes(item.en)
         // )
-        // let end = new Date().getTime()
-        // console.log(end - start, str, '执行结束', ar);
+        // const earthData = mockRes.filter((item: any) => item?.syndicateKey === "Ostrons")[0]
+        // for (let idx = 0; idx < earthData?.jobs.length; idx++) {
+        //     const ele: any = earthData?.jobs[idx]?.rewardPool;
+        //     // rewardPool
+        //     for (let index: any = 0; index < ele?.length; index++) {
+        //         const element = ele[index];
+        //         let reg1 = /[^\dX$,]/g
+        //         let reg2 = /[\dX$,]/g
+        //         let str1 = element.replace(reg1, '')
+        //         let str2 = element.replace(reg2, '')
+        //         const ar = dictionary.filter((item: any) => str2.includes(item.en))
+        //         // console.log(str2, 'str1');
+
+        //         // console.log(ar[0], '数据22');
+        //         ele[index] = `${ar[0]?.zh}`
+
+        //     }
+
+        // }
+
+        // // console.log(obj, 'objsss');
+        // console.log(earthData, '数据');
+
         news()
             .then((res: any) => {
                 if (res && res?.data) {

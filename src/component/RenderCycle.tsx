@@ -8,7 +8,7 @@ const RenderCycle = ({ cycle }: any) => {
         isOld: false
     })
     useEffect(() => {
-        axios.get(`wf/robot/${cycle}`)
+        axios.get(`/wf/robot/${cycle}`)
             .then((res: any) => {
                 if (res && res?.data) {
                     let arr = res?.data.replace(/\n/g, ',').split(',')
@@ -43,13 +43,13 @@ const RenderCycle = ({ cycle }: any) => {
         return () => clearInterval(timer)
     }, [cycle])
     useEffect(() => {
-      setInterval(() => {
+        let time = setInterval(() => {
             setState((s: any) => ({
                 ...s,
                 time: timeFormat(s?.time, s?.isOld ? -1 : 1)
             }))
         }, 1000)
-        // return () => clearInterval(time)
+        return () => clearInterval(time)
     }, [])
     return (
         <span style={{ marginLeft: 10, color: '#f0e6e6' }}>

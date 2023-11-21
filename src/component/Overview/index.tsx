@@ -3,6 +3,7 @@ import News from '../News'
 import Events from '../Events'
 import PlanetBounty from '../PlanetBounty'
 import Arbitration from '../Arbitration'
+import Fissures from '../Fissures'
 import styles from './Overview.module.less'
 import '../../index.css'
 function Overview() {
@@ -18,6 +19,7 @@ function Overview() {
             <PlanetBounty type="Ostrons" />
             <PlanetBounty type="Solaris" />
             <PlanetBounty type="EntratiSyndicate" />
+            <Fissures />
         </div>
     )
 }

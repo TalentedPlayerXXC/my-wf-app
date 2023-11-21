@@ -1,7 +1,14 @@
-// import { useEffect, useState } from "react"
 // import axios from "axios"
 
+import { useEffect, useState } from "react"
+/**
+ * 工具集
+ */
+// 时间过滤
 function timeFormat(time: any, ss: any) {
+    time = time?.includes('-') ? time?.replace('-', '') : time
+    ss = time?.includes('-') ? -ss : ss
+    let isfu = time?.includes('-')
     const regH = /(小时)|h/g
     const regM = /分|m/g
     const secondReplace = /秒|s/g
@@ -26,10 +33,11 @@ function timeFormat(time: any, ss: any) {
         if (h === 0 && m === 0) {
             return `${s}秒`
         }
-        return `${h}小时${m}分${s}秒`
+        return isfu ? `-${h}小时${m}分${s}秒` : `${h}小时${m}分${s}秒`
 
     }
 }
+// 星球枚举
 const cycleEnum: any = {
     earthCycle: '地球',
     cetusCycle: '希图斯', //地球平原
@@ -37,7 +45,7 @@ const cycleEnum: any = {
     cambionCycle: '殁世幽都',
     zarimanCycle: '扎里曼'
 }
-// 文字格式华   
+// 文字格式化
 const textFormat = (str: string) => {
     const reg = /\n/g
     if (str) {
@@ -45,7 +53,7 @@ const textFormat = (str: string) => {
         return str.replace(reg, '<br/>')
     }
 }
-
+// 日期过滤
 const formattedDate = (date: any) => {
     const newDate = new Date(date)
     const year = newDate.getFullYear()
@@ -67,11 +75,34 @@ const throttle = (fn: any, delay: number) => {
     }
 }
 
+// 倒计时组件
+const TimeoutComp = ({ fn }: any) => {
+    const [time, setTime] = useState(fn)
+    useEffect(() => {
+        let timer = setInterval(() => {
+            setTime((s: any) => timeFormat(s, 1))
+        }, 1000)
+        return () => { clearInterval(timer) }
+    })
+
+    return (
+        <>{time}</>
+    )
+}
+
+const filterdata = (data: Array<any>, key: string, searchVal: string) => {
+    if (!Array.isArray(data) || data?.length <= 0) {
+        return []
+    }
+    return data.filter(item => item[`${key}`] === searchVal)
+}
+
 export {
     timeFormat,
-    //  RenderCycle, 
     formattedDate,
     cycleEnum,
     textFormat,
-    throttle
+    throttle,
+    TimeoutComp,
+    filterdata
 }

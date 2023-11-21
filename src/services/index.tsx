@@ -21,21 +21,21 @@ function syndicateMissions(type = "detail") {
 }
 
 
-// 地球赏金  (仅限robot的string数据)
-// Ostrons
-function Ostrons(type = "robot") {
-    return axios.get(`wf/${type}/Ostrons`)
-}
-// 金星赏金  (仅限robot的string数据)
-// Solaris
-function Solaris(type = "robot") {
-    return axios.get(`wf/${type}/Solaris`)
-}
-// 火卫二赏金  (仅限robot的string数据)
-// EntratiSyndicate
-function EntratiSyndicate(type = "robot") {
-    return axios.get(`wf/${type}/Solaris`)
-}
+// // 地球赏金  (仅限robot的string数据)
+// // Ostrons
+// function Ostrons(type = "robot") {
+//     return axios.get(`wf/${type}/Ostrons`)
+// }
+// // 金星赏金  (仅限robot的string数据)
+// // Solaris
+// function Solaris(type = "robot") {
+//     return axios.get(`wf/${type}/Solaris`)
+// }
+// // 火卫二赏金  (仅限robot的string数据)
+// // EntratiSyndicate
+// function EntratiSyndicate(type = "robot") {
+//     return axios.get(`wf/${type}/Solaris`)
+// }
 // 新闻
 // news
 function news(type = "detail") {
@@ -46,15 +46,21 @@ function news(type = "detail") {
 function events(type = "detail") {
     return axios.get(`wf/${type}/events`)
 }
+// 裂隙
+// fissures
+function fissures(type = "detail") {
+    return axios.get(`wf/${type}/fissures`)
+}
 
 
 export {
     arbitration,
     sortie,
     syndicateMissions,
-    Ostrons,
-    Solaris,
-    EntratiSyndicate,
+    // Ostrons,
+    // Solaris,
+    // EntratiSyndicate,
     news,
     events,
+    fissures,
 }
