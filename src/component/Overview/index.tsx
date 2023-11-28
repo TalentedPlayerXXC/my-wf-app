@@ -16,9 +16,9 @@ function Overview() {
             <News />
             <Events />
             <Arbitration />
-            <PlanetBounty type="Ostrons" />
-            <PlanetBounty type="Solaris" />
-            <PlanetBounty type="EntratiSyndicate" />
+            <PlanetBounty/>
+            {/* <PlanetBounty type="Solaris" />
+            <PlanetBounty type="EntratiSyndicate" /> */}
             <Fissures />
         </div>
     )

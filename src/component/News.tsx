@@ -52,8 +52,9 @@ function News() {
 
             </span>
             <ul>
-                {newList?.map((item: any, idx: number) => (
-                    <li className={styles['card-item']} key={item?.id}>
+                {newList?.length ? newList?.map((item: any, idx: number) => (
+                    <li className={styles['card-item']} key={item?.id}
+                    >
                         <a
                             href={item?.link}
                             style={{
@@ -67,14 +68,18 @@ function News() {
                         >
                             <span>
                                 {idx + 1}.{item?.message}
-                                <span>
-                                    {item?.endDate ? `结束于${formattedDate(item?.endDate)}` : ''}
-                                </span>
+                            <span style={{ marginLeft: '5px' }}>
+                                {item?.endDate ? `结束于${formattedDate(item?.endDate)}` : ''}
+                            </span>
                             </span>
 
                         </a>
                     </li>
-                ))}
+                ))
+                    : <span style={{
+                        color: theme?.theme === 'dark' ? 'rgb(185, 207, 207)' : '#1677ff',
+                    }}>数据加载中</span>
+                }
             </ul>
         </div>
     )

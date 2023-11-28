@@ -41,22 +41,25 @@ function Fissures(): JSX.Element {
                 <p className={styles['card-title']}> 裂隙</p>
             </div>
             <ul style={{ color: theme?.theme === 'dark' ? 'rgb(185, 207, 207)' : '', }}>
-                {fissuresList.map((item: any) => (
-                    <li className={styles['card-item']} key={item?.id}
-                        style={{ flexDirection: 'column' }}
-                    >
-                        <div style={{ fontSize: 14, fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }}>
-                            <span> {item?.tier}</span>
-                            <span>
-                                <TimeoutComp fn={timeFormat(item?.eta, 0)} count={item?.eta?.includes('-') ? -1 : 1} />
-                            </span>
-                        </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                            <span>  {item?.isHard && '(钢铁之路)'} {item?.isStorm && '(九重天)'}{' '}{item?.node}</span>
-                            <span>{item?.missionType}</span>
-                        </div>
-                    </li>
-                ))}
+                {fissuresList?.length > 0 ?
+                    fissuresList.map((item: any) => (
+                        <li className={styles['card-item']} key={item?.id}
+                            style={{ flexDirection: 'column' }}
+                        >
+                            <div style={{ fontSize: 14, fontWeight: 'bold', display: 'flex', justifyContent: 'space-between' }}>
+                                <span> {item?.tier}</span>
+                                <span>
+                                    <TimeoutComp fn={timeFormat(item?.eta, 0)} count={item?.eta?.includes('-') ? -1 : 1} />
+                                </span>
+                            </div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between' }} >
+                                <span>  {item?.isHard && '(钢铁之路)'} {item?.isStorm && '(九重天)'}{' '}{item?.node}</span>
+                                <span>{item?.missionType}</span>
+                            </div>
+                        </li>
+                    ))
+                    : '数据正在加载中'
+                }
             </ul>
         </div>
     )
