@@ -10,7 +10,7 @@ import axios from 'axios'
 // arbitration 
 function arbitration(language = "zh" /**type='detail' */) {
     // return axios.get(`/api/wf/${type}/arbitration`)
-    return axios.get(`/v1/arbitration?language=${language}`)
+    return axios.get(`/v1/arbitration/?language=${language}`)
 }
 // 突击
 // sortie

@@ -16,6 +16,7 @@ function Arbitration() {
             .then(res => {
                 if (res && res?.data) {
                     setState(res?.data)
+                    setErr(false)
                 }
             })
             .catch(err => { console.log('似乎出现了一点问题', err);setErr(true) })
